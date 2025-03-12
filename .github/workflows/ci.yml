@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: BookStore App CI/CD Pipeline
 
 on:
   push:
