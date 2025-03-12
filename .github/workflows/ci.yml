@@ -12,13 +12,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # փոխարինիր այս արժեքը քո տարածաշրջանով
+
       - name: Log in to AWS ECR
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build and push Docker images
         env:
-          AWS_REGION: us-east-1
-          ECR_REGISTRY: <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
         run: |
           docker build -t $ECR_REGISTRY/bookstore-client:latest ./client
           docker build -t $ECR_REGISTRY/bookstore-server:latest ./server
@@ -31,7 +38,7 @@ jobs:
       - name: Run security scan with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: "<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/bookstore-client:latest"
+          image-ref: "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/bookstore-client:latest"
           format: "table"
           exit-code: 1
           severity: "CRITICAL,HIGH"
