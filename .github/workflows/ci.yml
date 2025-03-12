@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build-scan-push:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
