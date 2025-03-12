@@ -95,11 +95,12 @@ jobs:
           docker tag bookstore_nginx:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NGINX:latest
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NGINX:latest
      - name: Debug Repository Name
-         run: |
-           echo "ECR Repository Server: $ECR_REPOSITORY_SERVER"
-           echo "Full ECR Path: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_SERVER"
-         env:
-           AWS_REGION: ${{ secrets.AWS_REGION }}
-           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-           ECR_REPOSITORY_SERVER: ${{ secrets.ECR_REPOSITORY_SERVER }}
+        run: |
+          echo "ECR Repository Server: $ECR_REPOSITORY_SERVER"
+          echo "Full ECR Path: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_SERVER"
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          ECR_REPOSITORY_SERVER: ${{ secrets.ECR_REPOSITORY_SERVER }}
+
 
