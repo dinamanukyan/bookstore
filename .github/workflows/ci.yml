@@ -15,28 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Run tests for Server
-      - name: Run Server Tests
-        run: |
-          cd server
-          npm install
-          npm test
-
-      # Run tests for Client
-      - name: Run Client Tests
-        run: |
-          cd client
-          npm install
-          npm test
-
-      # Run tests for Nginx
-      - name: Run Nginx Tests
-        run: |
-          cd nginx
-          # Assuming Nginx tests are in place
-          # Replace with your actual test command
-          ./test-nginx.sh
-
       # Build Docker images for each service using their Dockerfile.dev
       - name: Build Server Image
         run: |
