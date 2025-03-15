@@ -108,7 +108,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@${{ secrets.EC2_IP }} "
             sudo apt update &&
-            sudo apt install -y docker-compose
+            sudo apt install -y docker-compose"
       - name: Copy server directory to EC2
         run: |
             scp -o StrictHostKeyChecking=no -i private_key.pem -r server ubuntu@${{ secrets.EC2_IP }}:/home/ubuntu/
