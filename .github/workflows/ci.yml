@@ -104,6 +104,7 @@ jobs:
         run: |
            sudo usermod -aG docker ubuntu
 
+
       
       - name: Copy docker-compose.yml to EC2
         run: |
