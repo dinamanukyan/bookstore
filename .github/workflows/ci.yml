@@ -1,4 +1,4 @@
-name: BookStore App CI Pipeline
+name: BookStore APP CI Pipeline
 
 on:
   push:
