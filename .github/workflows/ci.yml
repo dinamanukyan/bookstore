@@ -100,9 +100,9 @@ jobs:
           echo -e "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
           chmod 600 private_key.pem
           
-      - name: Add ubuntu user Permissons
-        run: |
-           sudo usermod -aG docker ubuntu
+      #- name: Add ubuntu user Permissons
+        #run: |
+           #sudo usermod -aG docker ubuntu
 
 
       
