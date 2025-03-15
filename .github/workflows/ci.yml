@@ -124,3 +124,4 @@ jobs:
       - name: Run application via docker-compose
         run: |
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_IP }} "docker-compose up -d"
+          
