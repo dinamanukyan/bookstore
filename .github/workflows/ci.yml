@@ -125,9 +125,9 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@${{ secrets.EC2_IP }} "docker-compose up -d"
       
-      - name: Add ubuntu user to docker group
-        run: |
-           sudo usermod -aG docker ubuntu
+      #- name: Add ubuntu user to docker group
+        #run: |
+           #sudo usermod -aG docker ubuntu
 
 
 
