@@ -116,3 +116,11 @@ jobs:
         run: |
           docker tag bookstore_nginx:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NGINX:latest
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY_NGINX:latest
+          
+      - name: Copy docker-compose.yml to EC2
+        run: |
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} docker-compose.yml ubuntu@${{ secrets.EC2_IP }}:/home/ubuntu/
+
+      - name: Run application via docker-compose
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@${{ secrets.EC2_IP }} "docker-compose up -d"
