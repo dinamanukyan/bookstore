@@ -105,11 +105,19 @@ jobs:
         run: |
           scp -o StrictHostKeyChecking=no -i private_key.pem docker-compose.yml ubuntu@${{ secrets.EC2_IP }}:/home/ubuntu/
       
+      #- name: Install Docker Compose on EC2
+        #run: |
+          #ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@${{ secrets.EC2_IP }} "
+            #sudo apt update &&
+            #sudo apt install -y docker-compose"
+
       - name: Install Docker Compose on EC2
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@${{ secrets.EC2_IP }} "
+            sudo rm -f /etc/apt/sources.list.d/grafana.list &&
             sudo apt update &&
             sudo apt install -y docker-compose"
+
       - name: Copy server directory to EC2
         run: |
             scp -o StrictHostKeyChecking=no -i private_key.pem -r server ubuntu@${{ secrets.EC2_IP }}:/home/ubuntu/
