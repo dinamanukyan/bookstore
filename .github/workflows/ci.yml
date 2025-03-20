@@ -115,8 +115,11 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@${{ secrets.EC2_IP }} "
             sudo rm -f /etc/apt/sources.list.d/grafana.list &&
-            sudo apt update &&
+            sudo apt-key del 963FA27710458545 || true &&
+            sudo apt update --allow-releaseinfo-change &&
+            sudo apt clean &&
             sudo apt install -y docker-compose"
+
 
       - name: Copy server directory to EC2
         run: |
